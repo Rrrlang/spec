@@ -70,6 +70,8 @@ rRrRrrRrrRrrRrrRrRrrrRrrRrrrRrrr
 RrRrrrRrrRr
 ```
 
+The program alphabet is {ε, `R`, `r`}
+
 ### Adding two unary numbers
 
 Encode numbers using `r` digits and use `R` as separators. 
@@ -102,6 +104,150 @@ rRrrrRrrrRrrRrRrRrrRrrrRrrRrrRrr
 RrrrRrrrRrrRrrRrrRrRrRrRrrrRrrrR
 rrrRrRrrRrrrr
 ```
+
+The program alphabet is {ε, `R`, `r`}
+
+### Copier
+
+The copier program effectively duplicates the given input, appending it to the end of the existing tape. This doubling process repeats the input string.
+
+For example, if the input is `r` the output will be `rr`. If the input is `rrr`, the output will be `rrrrrr`, and so on.
+
+1. Start at the beginning of the input string.
+2. Mark the first symbol.
+3. Move to the end of the input string and print it after an empty cell, which acts as a separator.
+4. Move back to the marked symbol, unmark it, and then mark the next symbol in the input.
+5. Repeat this process until all symbols have been copied.
+6. Finally, clear the last cell of the new string and rewrite the separator with a symbol.
+
+The program can be described by the flowchart:
+
+![Example Rrr program 3](example3.png)
+
+It is represented by the following quintuplets:
+
+(q0,r,R,>,q1)
+(q1,r,r,>,q1)
+(q1,ε,ε,>,q2)
+(q2,r,r,>,q2)
+(q2,ε,r,<,q3)
+(q3,r,r,<,q3)
+(q3,ε,ε,<,q4)
+(q4,r,r,<,q4)
+(q4,R,r,>,q0)
+(q0,ε,r,>,q5)
+(q5,r,r,>,q5)
+(q5,ε,ε,<,q6)
+(q6,r,ε,<,q7)
+
+The corresponding Rrr code reads:
+
+```rrr
+rRrrrRrrRrrRrrRrrRrrrRrrrRrrRrrR
+rrRrRrRrrRrrrRrrrRrrrRrrrRrrRrrr
+RrrrRrRrrrRrRrrrrRrrrrRrrrRrrrRr
+RrrrrRrrrrRrRrRrRrrrrrRrrrrrRrrr
+RrrrRrRrrrrrRrrrrrRrrRrrrRrrRrRr
+RrRrrrRrrRrrrrrrRrrrrrrRrrrRrrrR
+rrRrrrrrrRrrrrrrRrRrRrRrrrrrrrRr
+rrrrrrRrrrRrRrRrrrrrrrr
+```
+
+The program alphabet is {ε, `R`, `r`}
+
+### Palindromes
+
+A palindrome is a sequence of symbols that reads the same backwards as forwards, such as rRr or RRrRR.
+
+1. Read a symbol from the input.
+2. Move to the last symbol of the input.
+3. If the last symbol matches the one you read in step 1, clear the cell at the end, move back to the beginning, and start over.
+4. If the last symbol is different from the one you read in step 1, clear the entire input and reject by printing `R`.
+5. If the input is empty (all symbols have been matched and cleared), accept by printing `r`.
+
+![Example Rrr program 4](example4.png)
+
+It is represented by the following quintuplets:
+
+(q0,r,ε,>,q1)
+(q1,R,R,>,q1)
+(q1,r,r,>,q1)
+(q1,ε,ε,<,q2)
+(q2,ε,ε,<,q0)
+(q2,r,ε,<,q3)
+(q3,R,R,<,q3)
+(q3,r,r,<,q3)
+(q3,ε,ε,>,q0)
+(q0,R,ε,>,q4)
+(q4,R,R,>,q4)
+(q4,r,r,>,q4)
+(q4,ε,ε,<,q5)
+(q5,ε,ε,<,q0)
+(q5,R,ε,<,q3)
+(q0,ε,r,>,q7)
+(q2,R,ε,<,q6)
+(q5,r,ε,<,q6)
+(q6,R,ε,<,q6)
+(q6,r,ε,<,q6)
+(q6,ε,R,>,q7)
+
+The corresponding Rrr code reads:
+
+```rrr
+rRrrrRrRrrRrrRrrRrrRrrRrrRrrRrrR
+rrrRrrrRrrRrrRrrRrRrRrRrrrRrrrRr
+RrRrRrRrrrRrrrRrRrRrrrrRrrrrRrrR
+rrRrRrrrrRrrrrRrrrRrrrRrRrrrrRrr
+rrRrRrRrrRrRrRrrRrRrrRrrrrrRrrrr
+rRrrRrrRrrRrrrrrRrrrrrRrrrRrrrRr
+rRrrrrrRrrrrrRrRrRrRrrrrrrRrrrrr
+rRrRrRrRrRrrrrrrRrrRrRrRrrrrRrRr
+RrrrRrrRrrrrrrrrRrrrRrrRrRrRrrrr
+rrrRrrrrrrRrrrRrRrRrrrrrrrRrrrrr
+rrRrrRrRrRrrrrrrrRrrrrrrrRrrrRrR
+rRrrrrrrrRrrrrrrrRrRrrRrrRrrrrrr
+rr
+```
+
+The program alphabet is {ε, `R`, `r`}
+
+### Hello World
+
+It simply prints `Hello World`.
+
+The program can be described by the flowchart:
+
+![Example Rrr program 5](example5.png)
+
+It is represented by the following quintuplets:
+
+(q0,ε,H,>,q1)
+(q1,ε,e,>,q2)
+(q2,ε,l,>,q3)
+(q3,ε,l,>,q4)
+(q4,ε,o,>,q5)
+(q5,ε,ε,>,q6)
+(q6,ε,W,>,q7)
+(q7,ε,o,>,q8)
+(q8,ε,r,>,q9)
+(q9,ε,l,>,q10)
+(q10,ε,d,>,q11)
+
+The corresponding Rrr code reads:
+
+```rrr
+rRrRrrRrrRrrRrrRrRrrrRrrRrrrRrrr
+RrRrrrrRrrRrrrrRrrrrRrRrrrrRrrRr
+rrrrRrrrrrRrRrrrrrRrrRrrrrrrRrrr
+rrrRrRrRrrRrrrrrrrRrrrrrrrRrRrrr
+rrrRrrRrrrrrrrrRrrrrrrrrRrRrrrrr
+RrrRrrrrrrrrrRrrrrrrrrrRrRrrrrrr
+rRrrRrrrrrrrrrrRrrrrrrrrrrRrRrrr
+rRrrRrrrrrrrrrrrRrrrrrrrrrrrRrRr
+rrrrrrrRrrRrrrrrrrrrrrr
+```
+
+The program alphabet is {ε, `H`, `e`, `l`, `o`, `W`, `r`, `d`}
 
 ## Universal Turing Machine in Rrr
 
