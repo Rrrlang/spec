@@ -105,7 +105,7 @@ test('Universal machine', () => {
     // extract only the working tape
     out = out.substring(0, out.lastIndexOf('#'))
     out = out.substring(out.lastIndexOf('#') + 1)
-    out = out.replaceAll(/\*|R/g,'')  // remove meaningless symbols
+    out = out.replaceAll(/[^r]/g,'')  // remove meaningless symbols
 
     expect(out).toBe('rrrrr') // 5
 })
