@@ -1,0 +1,20 @@
+{
+  "name": "rrr-js",
+  "version": "1.0.0",
+  "description": "Rrr interpreter in JavaScript",
+  "main": "rrr.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "keywords": [
+    "rrr",
+    "turing machine",
+    "javascript",
+    "interpreter"
+  ],
+  "author": "Tomas Tulka (ttulka)",
+  "license": "MIT",
+  "devDependencies": {
+    "jest": "^29.7.0"
+  }
+}

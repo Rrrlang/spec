@@ -28,11 +28,11 @@ and the current state is updated to the next state *q<sub>i+1</sub>* from the co
 The syntax of Rrr consists of quintuplets of elements encoded as unary numbers
 of symbols (digits) `r`. The elements are separated by the symbol `R`:
 
-![Rrr quintuplet](syntax1.png)
+![Rrr quintuplet](assets/syntax1.png)
 
 The quintuplets are as well separated by the symbol `R`:
 
-![Rrr quintuplets](syntax2.png)
+![Rrr quintuplets](assets/syntax2.png)
 
 ### Semantic
 
@@ -47,7 +47,23 @@ The semantic of Rrr corresponds to the Turing machine quintuples encoded via una
 
 A concrete alphabet is provided to the simulating machine as a parameter.
 
+## Interpreter
+
+There is a simple [JavaScript interpreter](interpreter) for Rrr:
+
+```sh
+cd interpreter
+npm install
+npm test
+```
+
+```js
+
+```
+
 ## Examples
+
+All source code can be found in [examples](interpreter/rrr.test.js).
 
 ### Generating a sequence of Rrr words
 
@@ -55,7 +71,7 @@ Read empty cells continuously, write `R` followed by two `r`s and repeat.
 
 The program can be described by the flowchart:
 
-![Example Rrr program 1](example1.png)
+![Example Rrr program 1](assets/example1.png)
 
 It is represented by the following quintuplets:
 
@@ -87,7 +103,7 @@ To carry out the calculation, shift the second number one cell to the left.
 
 The program can be described by the flowchart:
 
-![Example Rrr program 2](example2.png)
+![Example Rrr program 2](assets/example2.png)
 
 It is represented by the following quintuplets:
 
@@ -122,7 +138,7 @@ For example, if the input is `r` the output will be `rr`. If the input is `rrr`,
 
 The program can be described by the flowchart:
 
-![Example Rrr program 3](example3.png)
+![Example Rrr program 3](assets/example3.png)
 
 It is represented by the following quintuplets:
 
@@ -165,7 +181,7 @@ A palindrome is a sequence of symbols that reads the same backwards as forwards,
 4. If the last symbol is different from the one you read in step 1, clear the entire input and reject by printing `R`.
 5. If the input is empty (all symbols have been matched and cleared), accept by printing `r`.
 
-![Example Rrr program 4](example4.png)
+![Example Rrr program 4](assets/example4.png)
 
 It is represented by the following quintuplets:
 
@@ -217,7 +233,7 @@ It simply prints `Hello World`.
 
 The program can be described by the flowchart:
 
-![Example Rrr program 5](example5.png)
+![Example Rrr program 5](assets/example5.png)
 
 It is represented by the following quintuplets:
 
@@ -254,7 +270,15 @@ The program alphabet is {ε, `H`, `e`, `l`, `o`, `W`, `r`, `d`}
 Rrr is obviously Turing-complete as it corresponds one-to-one to the description
 of how a Turing machine works.
 
-A universal machine for Rrr, that is, a program written in Rrr that can interpret any programs in Rrr, reads as follows:
+A universal machine for Rrr, that is, a program written in Rrr that can interpret
+any programs in Rrr.
+
+The alphabet of the universal machine is {ε, `R`, `r`, `+`, `#`, `*`}
+
+
+
+
+The whole universal machine in Rrr reads as follows:
 
 ```rrr
 rRrrrRrrrRrrRrRrRrrRrrRrrRrrRrrR
