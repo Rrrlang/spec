@@ -133,13 +133,13 @@ class DescNumber {
 class TM {
 
     constructor(tm, input, alphabet) {
-        this.tape = new Tape(input)
+        this.tape = new Tape(input.replaceAll(/(\s|\r\n|\n|\r)/gm, ''))
         this.head = new Head(this.tape)
         this.control = new Control(
             new DescNumber(tm).parse(alphabet))
     }
 
-    compute(maxSteps = 10000000) {
+    compute(maxSteps = 1000) {
         let steps = 0
 
         let next

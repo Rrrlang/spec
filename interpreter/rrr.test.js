@@ -1,33 +1,34 @@
 const TM = require('./rrr')
+const fs = require('fs')
 
 test('Generating a sequence of Rrr words', () => {
 
-    const res = new TM(`
+    const out = new TM(`
         rRrRrrRrrRrrRrrRrRrrrRrrRrrrRrrr
         RrRrrrRrrRr`,
         '',
         ['ε', 'R', 'r']
     ).compute(100)
 
-    expect(res).toBe('RrrRrrRrrRrrRrrRrrRrrRrrRrrRrrRrrRrrRrrRrrRrrRrrRrrRrrRrrRrrRrrRrrRrrRrrRrrRrrRrrRrrRrrRrrRrrRrrRrr')
+    expect(out).toBe('RrrRrrRrrRrrRrrRrrRrrRrrRrrRrrRrrRrrRrrRrrRrrRrrRrrRrrRrrRrrRrrRrrRrrRrrRrrRrrRrrRrrRrrRrrRrrRrrRrr')
 })
 
 test('Adding two unary numbers', () => {
 
-    const res = new TM(`
+    const out = new TM(`
         rRrrrRrrrRrrRrRrRrrRrrrRrrRrrRrr
         RrrrRrrrRrrRrrRrrRrRrRrRrrrRrrrR
         rrrRrRrrRrrrr`,
-        'rrRrrr', /* 2 + 3 */
+        'rrRrrr', // 2 + 3
         ['ε', 'R', 'r']
     ).compute()
 
-    expect(res).toBe('rrrrr' /* 5 */)
+    expect(out).toBe('rrrrr') // 5
 })
 
 test('Copier', () => {
 
-    const res = new TM(`
+    const out = new TM(`
         rRrrrRrrRrrRrrRrrRrrrRrrrRrrRrrR
         rrRrRrRrrRrrrRrrrRrrrRrrrRrrRrrr
         RrrrRrRrrrRrRrrrrRrrrrRrrrRrrrRr
@@ -40,12 +41,12 @@ test('Copier', () => {
         ['ε', 'R', 'r']
     ).compute()
 
-    expect(res).toBe('rrrrrr')
+    expect(out).toBe('rrrrrr')
 })
 
 test('Palindromes', () => {
 
-    const res = new TM(`
+    const out = new TM(`
         rRrrrRrRrrRrrRrrRrrRrrRrrRrrRrrR
         rrrRrrrRrrRrrRrrRrRrRrRrrrRrrrRr
         RrRrRrRrrrRrrrRrRrRrrrrRrrrrRrrR
@@ -63,12 +64,12 @@ test('Palindromes', () => {
         ['ε', 'R', 'r']
     ).compute()
 
-    expect(res).toBe('r')
+    expect(out).toBe('r')
 })
 
 test('Hello World', () => {
 
-    const res = new TM(`
+    const out = new TM(`
         rRrRrrRrrRrrRrrRrRrrrRrrRrrrRrrr
         RrRrrrrRrrRrrrrRrrrrRrRrrrrRrrRr
         rrrrRrrrrrRrRrrrrrRrrRrrrrrrRrrr
@@ -82,5 +83,29 @@ test('Hello World', () => {
         ['ε','H','e','l','o','W','r','d']
     ).compute()
 
-    expect(res).toBe('Hello World')
+    expect(out).toBe('Hello World')
+})
+
+test('Universal machine', () => {
+
+    const utm = fs.readFileSync('./utm.rrr').toString()
+
+    // adding two unary numbers
+    const program = `
+        rRrrRrrRrrRrRrRrRrrRrrRrrRrrRrrR
+        rrRrrRrrRrrRrRrRrRrrrRrrrRrrRrRr
+        rRrrrr`
+
+    let out = new TM(
+        utm,
+        program + 'RR' + 'rrRrrrR', // 2 + 3
+        ['ε', 'R', 'r', '+', '#', '*'] // universal machine's alphabet
+    ).compute(99999)
+
+    // extract only the working tape
+    out = out.substring(0, out.lastIndexOf('#'))
+    out = out.substring(out.lastIndexOf('#') + 1)
+    out = out.replaceAll(/\*|R/g,'')  // remove meaningless symbols
+
+    expect(out).toBe('rrrrr') // 5
 })
