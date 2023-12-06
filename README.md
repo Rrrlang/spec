@@ -5,8 +5,8 @@ Turing-complete programming language
 
 ## Overview
 
-Rrr is a programming language to describe a Turing machine using only a binary alphabet 
-consisting of only two symbols, `R` and `r`.
+Rrr is a programming language to describe a Turing machine using a binary alphabet 
+consisting of symbols, `R` and `r`.
 
 A program in Rrr is a sequence of instructions for a universal machine.
 Each command represents a transition, which includes a starting state, a conditional 
@@ -14,8 +14,8 @@ read symbol, a write symbol, a move action, and a next state.
 
 ### How it works
 
-The universal Turing machine reads a description of a Turing machine encoded as a Rrr
-program and simulates it.
+The universal Turing machine reads a description of a Turing machine encoded in Rrr
+and simulates it.
 
 In each state *q<sub>i</sub>* with the current symbol *s* on the tape, the universal 
 machine searches for a command with the starting state *q<sub>i</sub>* and the read
@@ -174,12 +174,12 @@ The program alphabet is { ε, `R`, `r` }
 
 ### Palindromes
 
-A palindrome is a sequence of symbols that reads the same backwards as forwards, such as rRr or RRrRR.
+A palindrome is a sequence of symbols that reads the same backward as forward, such as rRr or RRrRR.
 
 1. Read a symbol from the input.
 2. Move to the last symbol of the input.
-3. If the last symbol matches the one you read in step 1, clear the cell at the end, move back to the beginning, and start over.
-4. If the last symbol is different from the one you read in step 1, clear the entire input and reject by printing `R`.
+3. If the last symbol matches the one you read in Step 1, clear the cell at the end, move back to the beginning, and start over.
+4. If the last symbol is different from the one you read in Step 1, clear the entire input and reject by printing `R`.
 5. If the input is empty (all symbols have been matched and cleared), accept by printing `r`.
 
 ![Example Rrr program 4](assets/example4.png)
