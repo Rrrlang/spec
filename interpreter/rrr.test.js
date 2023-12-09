@@ -109,3 +109,26 @@ test('Universal machine', () => {
 
     expect(out).toBe('rrrrr') // 5
 })
+
+test('One-state busy beaver', () => {
+
+    const out = new TM(`
+        rRrRrrRrrRrr`,
+        '',
+        ['ε','X']
+    ).compute()
+
+    expect(out).toBe('X')
+})
+
+test('Two-state busy beaver', () => {
+
+    const out = new TM(`
+        rRrRrrRrrRrrRrRrrRrrRrRrrRrrRrRr
+        rRrRrRrrRrrRrrRrrRrrr`,
+        '',
+        ['ε','X']
+    ).compute()
+
+    expect(out).toBe('XXXX')
+})
