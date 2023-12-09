@@ -132,3 +132,20 @@ test('Two-state busy beaver', () => {
 
     expect(out).toBe('XXXX')
 })
+
+test('One-state busy beaver in text', () => {
+
+    const out = new TM(`
+        One-state busy beaver
+        =====================
+        1. Read a symbol under the head.
+        2. Reading a zero, write a one.
+        3. Right away move to the right.
+        4. Transit to the next state.
+        5. Ready. The program terminates.`,
+        '',
+        ['ε','X']
+    ).compute()
+
+    expect(out).toBe('X')
+})
